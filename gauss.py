@@ -37,16 +37,13 @@ def plot_3d(X,Y,Z):
     ax1.set_xlabel('x')
     ax1.set_ylabel('y')
     ax1.set_zlabel('f(x,y)')
-    plt.show()
     
-    plt.figure(2)
+    fig2 = plt.figure(2)
     im = pl.imshow(Z)
     cset = pl.contour(Z,[0.1,0.2,0.5,0.6,0.7])
     pl.clabel(cset,inline=True)
     pl.colorbar(im)
     plt.title('Contour')
-    plt.show()
-
-#def 
+    return fig1,fig2
 
     
