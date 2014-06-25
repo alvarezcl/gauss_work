@@ -12,18 +12,24 @@ import numpy as np
 
 x = y = np.linspace(-20,20,200)
 x0 = 0
-y0 = 0
+y0 = -5
 varx = 1
-vary = 3
-alpha = np.pi/2
-X,Y,Z = gauss.mult_gaussFun(x,y,x0,y0,varx,vary,alpha)
+vary = 5
+A = 1 # Amplitude
+alpha = 0
+rho1,X,Y,Z = gauss.mult_gaussFunAlt(A,x,y,x0,y0,varx,vary,alpha)
 
-xp0 = 5
-yp0 = 5
+xp0 = 10
+yp0 = 0
 varxp = 8
 varyp = 2
 alphap = 0
-X,Y,Zp = gauss.mult_gaussFun(x,y,xp0,yp0,varxp,varyp,alphap)
+B = 0.5 # Amplitude
+rho2,X,Y,Zp = gauss.mult_gaussFunAlt(B,x,y,xp0,yp0,varxp,varyp,alphap)
 
-fig1 = gauss.plot_3d(X,Y,Z+Zp)
-fig2 = gauss.plot_contour(Z+Zp)
+fig3 = gauss.plot_3d(X,Y,Z+Zp)
+fig4 = gauss.plot_contour(Z+Zp)
+
+# Plotting rho vs alpha (Note the divergence of rho)
+a = np.linspace(-np.pi/2,np.pi/2,100)
+rho = (varx-vary)*np.tan(2*a)/(2*np.sqrt(varx*vary))
