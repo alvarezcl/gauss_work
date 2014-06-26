@@ -9,27 +9,24 @@ Created on Tue Jun 24 21:20:27 2014
 
 import gauss
 import numpy as np
+import matplotlib.pyplot as plt
 
-x = y = np.linspace(-20,20,200)
-x0 = 0
-y0 = -5
-varx = 1
-vary = 5
-A = 1 # Amplitude
-alpha = 0
-rho1,X,Y,Z = gauss.mult_gaussFunAlt(A,x,y,x0,y0,varx,vary,alpha)
+# This portion creates a gaussian at an angle -pi/4 relative to x-y space
+x = y = np.linspace(-10,10,100)
+A = 1
+var_p1 = 4
+var_p2 = 1
+x0 = 0; y0 = 0
+alpha = -np.pi/4
+X,Y,Z,varx,vary,cov,rho,P1,P2,ZP = gauss.mult_gaussPrincipal(A,x,y,x0,y0,var_p1,var_p2,alpha)
 
-xp0 = 10
-yp0 = 0
-varxp = 8
-varyp = 2
-alphap = 0
-B = 0.5 # Amplitude
-rho2,X,Y,Zp = gauss.mult_gaussFunAlt(B,x,y,xp0,yp0,varxp,varyp,alphap)
+# This portion creates a gaussian at an angle pi/4 relative to x-y space
+Ap = 0.5
+var_p1p = 5
+var_p2p = 3
+x0p = 4
+y0p = 2
+alphap = np.pi/4
+Xp,Yp,Zp,varxp,varyp,covp,rhop,P1p,P2p,Zpp = gauss.mult_gaussPrincipal(Ap,x,y,x0p,y0p,var_p1p,var_p2p,alphap)
 
-fig3 = gauss.plot_3d(X,Y,Z+Zp)
-fig4 = gauss.plot_contour(Z+Zp)
-
-# Plotting rho vs alpha (Note the divergence of rho)
-a = np.linspace(-np.pi/2,np.pi/2,100)
-rho = (varx-vary)*np.tan(2*a)/(2*np.sqrt(varx*vary))
+fig = gauss.plot_contour(Zp+Z)
