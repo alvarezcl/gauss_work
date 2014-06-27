@@ -4,6 +4,7 @@ Created on Mon Jun 23 23:30:16 2014
 
 @author: luis
 """
+# This file contains a library of useful functions.
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -11,7 +12,7 @@ from mpl_toolkits.mplot3d import Axes3D
 import pylab as pl
 from matplotlib import cm
 import gauss
-#from scipy.stats import multivariate_normal
+from scipy.stats import multivariate_normal
 
 # Function returns a scalar evaluated at x with gaussian function.
 def gauss_1d(x,mean,variance):
@@ -28,8 +29,8 @@ def mult_gaussStats(x,y,mean,cov):
     X,Y = np.meshgrid(x,y)
     pos = np.emptry(X.shape + (2,))
     pos[:,:,0] = X; pos[:,:,1] = Y
-    #rv = multivariate_normal(mean,cov)
-    #return rv, X, Y
+    rv = multivariate_normal(mean,cov)
+    return rv, X, Y
 
 # Plot 3d surface given any set of values, X, Y, Z    
 def plot_3d(X,Y,Z):
@@ -82,22 +83,23 @@ def transform_Var(var_p1,var_p2,alpha):
     rho = cov/(np.sqrt(varx*vary))
     return varx,vary,cov,rho
 
-    
+# This function returns information on variances and covariance,
+# in order to plot gaussians at any centroid oriented at an angle, alpha.
 def mult_gaussPrincipal(A,x,y,x0,y0,var_p1,var_p2,alpha):
-"""
-Parameters:
-    A: Amplitude of Gaussian
-    x: x Domain
-    y: y Domain
-    x0,y0: Centroid of Gaussian
-    var_p1: Variance in semi-major/minor axis in P1 domain
-    var_p2: Variance in semi-major/minor axis in P2 domain
-    alpha: Orientation of distribution with respect to x
-Returns:
-   X,Y,Z: Domain and Gaussian Functional Values in Z
-   varx,vary,cov,rho: Variance in x,y, and the Covariance and Correlation Co.
-   P1,P2,Zp: Domain and Gaussian Functional Values in Principal Axes Frame  
-"""
+    """
+    Parameters:
+        A: Amplitude of Gaussian
+        x: x Domain
+        y: y Domain
+        x0,y0: Centroid of Gaussian
+        var_p1: Variance in semi-major/minor axis in P1 domain
+        var_p2: Variance in semi-major/minor axis in P2 domain
+        alpha: Orientation of distribution with respect to x
+        Returns:
+            X,Y,Z: Domain and Gaussian Functional Values in Z
+            varx,vary,cov,rho: Variance in x,y, and the Covariance and Correlation Co.
+            P1,P2,Zp: Domain and Gaussian Functional Values in Principal Axes Frame  
+    """
     P1,P2,Zp = gauss.mult_gaussFunAlt(A,x,y,0,0,var_p1,var_p2,0)
     varx,vary,cov,rho = gauss.transform_Var(var_p1,var_p2,alpha)
     X,Y,Z = gauss.mult_gaussFun(A,x,y,x0,y0,varx,vary,cov,rho,alpha)
