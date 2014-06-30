@@ -12,7 +12,7 @@ from mpl_toolkits.mplot3d import Axes3D
 import pylab as pl
 from matplotlib import cm
 import gauss
-from scipy.stats import multivariate_normal
+# from scipy.stats import multivariate_normal
 
 # Function returns a scalar evaluated at x with gaussian function.
 def gauss_1d(x,mean,variance):

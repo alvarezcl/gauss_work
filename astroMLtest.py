@@ -21,8 +21,8 @@ import gauss
 # Produce a number of points in x-y from 1 bi-variate gaussian
 # distribution. 
 mean = [0,0]
-cov = [[3,0],[0,3]]
-N = 10000
+cov = [[5,0],[0,3]]
+N = 5000
 x,y = np.random.multivariate_normal(mean,cov,N).T
 Z = np.array([x,y])
 
@@ -39,5 +39,5 @@ plt.hold()
 V = [cov, 2*cov]
 plt.hold()
 plt.plot(x,y,'x',linewidth=1); plt.axis('equal')
-plt.contour(X,Y,Z,3,color='k')
+plt.contour(X,Y,Z,3,color='k', zorder = 10)
 plt.show()

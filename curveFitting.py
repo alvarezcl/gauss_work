@@ -13,11 +13,21 @@ import matplotlib.mlab as mlab
 import matplotlib.pyplot as plt
 
 # Beginning in one dimension:
-mean = 0; stdDev = 1; N = 100000
-scatter = np.random.normal(mean,stdDev,N)
+mean = 0; stdDev = 1; Npoints = 1000
+scatter = np.random.normal(mean,stdDev,Npoints)
+
 mu,sigma = norm.fit(scatter)
 
-n, bins, patches = plt.hist(scatter,50,facecolor='green')
+# print "  scatter = " , scatter 
+
+print "  mu, sigma = ", mu,sigma
+
+nbins = 50
+
+freqhisto, bins, patches = plt.hist(scatter, nbins, facecolor='green')
+
+print "  freqhisto = " , freqhisto 
+
 y = mlab.normpdf(bins,mu,sigma)
 l = plt.plot(bins,y,'r--')
 

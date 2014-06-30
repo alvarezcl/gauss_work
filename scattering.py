@@ -21,12 +21,20 @@ plt.show()
 mean = [3,4]
 cov = [[3,1],[1,3]] 
 x,y = np.random.multivariate_normal(mean,cov,1000).T
-plt.plot(x,y,'x'); plt.axis('equal'); plt.show()
-Z = np.array([x,y])
+
+plt.plot(x,y,'x'); plt.axis('equal')
+
+# plt.show()
+
+# Z = np.array([x,y])
 # Produce a number of points in x-y from another distribution.
 mean = [0,0]
 cov = [[3,2],[2,3]] 
 xp,yp = np.random.multivariate_normal(mean,cov,1000).T
-plt.plot(xp,yp,'o'); plt.axis('equal'); plt.show()
-Zp = np.array([xp,yp])
+
+plt.plot(xp,yp,'o'); plt.axis('equal')
+
+plt.show()
+
+# Zp = np.array([xp,yp])
 
