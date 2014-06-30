@@ -29,7 +29,9 @@ sudo scons install
 BOOST
 Download boost, unpack .tar
 run:
-./bootstrap.sh –with-python=<pythonDirectory> (To ensure Boost runs with appropriate version )
+./bootstrap.sh –with-python=<pythonDirectory> (To ensure Boost runs with appropriate version)
+./b2 link=shared
+./b2 --PREFIX=<Install_Dir> link=shared install
 
 Now go back to GalSim Dir:
 scons
@@ -37,5 +39,6 @@ or
 scons -options for linking EXTRA_INCLUDE_PATH, TMV_DIR, BOOST_DIR
 
 (Had to go back and recompile TMV with PREFIX, WITH_OPENMP=False)
+(Had to recompile with ./b2)
 
 
