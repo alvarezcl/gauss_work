@@ -1,0 +1,41 @@
+First off,
+
+Git clone …
+
+Open INSTALL.md to read installation instructions.
+
+Check dependencies:
+Numpy
+Astropy
+PyYAML
+PyAST WCS pkg – Download .tar and run: python setup.py install
+Astropy WCS (Scipy Dependency)
+
+Scons – sudo apt-get install scons (2.0 or 2.1)
+
+FFTW(3) for version 3 or above. 
+Download .tar, cd into extracted file, run :
+sudo ./configure
+sudo make 
+sudo make install
+
+TMV
+http://code.google.com/p/tmv-cpp/
+Download .tar, unpack
+then run:
+sudo scons install
+(Takes a while)
+
+BOOST
+Download boost, unpack .tar
+run:
+./bootstrap.sh –with-python=<pythonDirectory> (To ensure Boost runs with appropriate version )
+
+Now go back to GalSim Dir:
+scons
+or
+scons -options for linking EXTRA_INCLUDE_PATH, TMV_DIR, BOOST_DIR
+
+(Had to go back and recompile TMV with PREFIX, WITH_OPENMP=False)
+
+
