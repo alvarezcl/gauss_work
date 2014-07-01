@@ -12,11 +12,17 @@ from mpl_toolkits.mplot3d import Axes3D
 import pylab as pl
 from matplotlib import cm
 import gauss
-# from scipy.stats import multivariate_normal
+from scipy.stats import multivariate_normal
 
 # Function returns a scalar evaluated at x with gaussian function.
 def gauss_1d(x,mean,variance):
     return (1/np.sqrt(2*np.pi*variance))*np.exp(-(x-mean)**2/(2*variance))
+
+# Draw from a 1D gaussian
+def draw_1dGauss(mean,var,N):
+    scatter = np.random.normal(mean,np.sqrt(var),N)
+    scatter = np.sort(scatter)
+    return scatter
 
 # Return the sum of two gaussians that vary a long differing dimensions.
 def sum_gauss(x,mean1,var1,y,mean2,var2):
@@ -34,7 +40,7 @@ def mult_gaussStats(x,y,mean,cov):
 
 # Plot 3d surface given any set of values, X, Y, Z    
 def plot_3d(X,Y,Z):
-    fig1 = plt.figure(1)
+    fig1 = plt.figure()
     ax1 = Axes3D(fig1)
     surf = ax1.plot_surface(X,Y,Z,cmap=cm.coolwarm)
     fig1.colorbar(surf,shrink=0.5,aspect=5)
@@ -105,4 +111,31 @@ def mult_gaussPrincipal(A,x,y,x0,y0,var_p1,var_p2,alpha):
     X,Y,Z = gauss.mult_gaussFun(A,x,y,x0,y0,varx,vary,cov,rho,alpha)
     return X,Y,Z,varx,vary,cov,rho,P1,P2,Zp
     
-    
+# Given a data array of x and y such that they correspond
+# to a number of points, this draws a 3d Bar Graph corresponding
+# to density of points.
+def hist_3dBar(x,y,bins):
+    fig = plt.figure()
+    ax = Axes3D(fig)
+    hist, xedges, yedges = np.histogram2d(x,y,bins)
+    elements = (len(xedges) - 1) * (len(yedges) - 1)
+    xpos, ypos = np.meshgrid(xedges[:-1]+0.25, yedges[:-1]+0.25)
+    xpos = xpos.flatten()
+    ypos = ypos.flatten()
+    zpos = np.zeros(elements)
+    dx = 0.3*np.ones_like(zpos)
+    dy = dx.copy()
+    dz = hist.flatten()
+    ax.bar3d(xpos, ypos, zpos, dx, dy, dz, color='b', zsort='average')
+    return fig
+
+# Produce 2D histogram projection of the density of points corresponding
+# to x-y.   
+def hist_2dPlane(x,y,bins):
+    H,xedges,yedges = np.histogram2d(x,y,bins,normed=False)
+    X,Y = np.meshgrid(xedges,yedges)
+    img = plt.imshow(H,interpolation ='none')
+    plt.grid(True)
+    pl.colorbar(img)
+    plt.show()
+    return X,Y,H,img
