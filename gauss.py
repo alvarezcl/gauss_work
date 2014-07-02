@@ -18,9 +18,18 @@ from scipy.stats import multivariate_normal
 def gauss_1d(x,mean,variance):
     return (1/np.sqrt(2*np.pi*variance))*np.exp(-(x-mean)**2/(2*variance))
 
+# Define model function to be used to fit to the data above:
+def gaussFun(x, *p):
+    A, mu, sigma = p
+    return A*np.exp(-(x-mu)**2/(2.*sigma**2))
+
+def inverseGaussFun(x, *p):
+    A, mu, sigma = p
+    return np.sqrt(2*sigma**2*np.log(A/x)) + mu
+
 # Draw from a 1D gaussian
 def draw_1dGauss(mean,var,N):
-    scatter = np.random.normal(mean,np.sqrt(var),N)
+    scatter = A*np.random.normal(mean,np.sqrt(var),N)
     scatter = np.sort(scatter)
     return scatter
 
@@ -135,7 +144,9 @@ def hist_2dPlane(x,y,bins):
     H,xedges,yedges = np.histogram2d(x,y,bins,normed=False)
     X,Y = np.meshgrid(xedges,yedges)
     img = plt.imshow(H,interpolation ='none')
-    plt.grid(True)
+    #plt.grid(True)
     pl.colorbar(img)
     plt.show()
     return X,Y,H,img
+
+# Produce 

@@ -29,5 +29,8 @@ y0p = 2
 alphap = np.pi/4
 Xp,Yp,Zp,varxp,varyp,covp,rhop,P1p,P2p,Zpp = gauss.mult_gaussPrincipal(Ap,x,y,x0p,y0p,var_p1p,var_p2p,alphap)
 
+# Since the domains of the individual gaussians were the same,
+# the surfaces interact in real space appropriately. The matrices
+# Z and Zp are mapped onto the x-y domain.
 fig = gauss.plot_contour(Zp+Z)
 con = gauss.plot_3d(X,Y,Zp+Z)
