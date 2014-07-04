@@ -12,22 +12,27 @@ import gauss
 
 norm = False
 N_tot = 10000
-drp = 0.6; str_dr = '$/D_{rp}=%.1f$' % drp; str_ds = '$/D_{rs}=%.1f$' % (1-drp)
+drp = 0.8; str_dr = '$/D_{rp}=%.1f$' % drp; str_ds = '$/D_{rs}=%.1f$' % (1-drp)
 
 # Draw from the major gaussian. Note the number N. It is
 # the main parameter in obtaining your estimators.
 mean = 0; sigma = 1; var = sigma**2; N = N_tot*drp
 points = gauss.draw_1dGauss(mean,var,N)
-bins = N/50
-hist,bin_edges = np.histogram(points,bins,density=norm)
+
+# Histogram parameters
+bin_size = 0.1; min_edge = mean-6*sigma; max_edge = mean+9*sigma
+Nn = (max_edge-min_edge)/bin_size; Nplus1 = Nn + 1
+bin_list = np.linspace(min_edge, max_edge, Nplus1)
+
+hist,bin_edges = np.histogram(points,bin_list,density=norm)
 bin_centers = (bin_edges[:-1] + bin_edges[1:])/2.0
 width = bin_edges[1]-bin_edges[0]
 
 # Now draw from a minor gaussian. Note Np
 meanp = 3; sigmap = 1; varp = sigmap**2; Np = N_tot-N
 pointsp = gauss.draw_1dGauss(meanp,varp,Np)
-binsp = bins    
-histp,bin_edgesp = np.histogram(pointsp,binsp,density=norm)
+binsp = bin_list
+histp,bin_edgesp = np.histogram(pointsp,bin_list,density=norm)
 bin_centersp = (bin_edgesp[:-1] + bin_edgesp[1:])/2.0
 widthp = bin_edgesp[1]-bin_edgesp[0]
 
@@ -44,17 +49,17 @@ p = (parametersPrim[0],parametersPrim[1],parametersPrim[2])
 pp = (parametersSec[0],parametersSec[1],parametersSec[2])
 
 # Domain
-x = np.linspace(mean-8*sigma,meanp+8*sigmap,1000)
+x = np.linspace(min_edge,max_edge,1000)
 
-# Obtain Gaussian Curves for estimated parameters
+# Obtain Gaussian Curves for estimated parameters from P and S
 PrimGauss = gauss.gaussFun(x,*p); SecGauss = gauss.gaussFun(x,*pp)
 
-# Check Amplitude Ratio and make sure it is around 1-dr
+# Check Amplitude Ratio for Secondary and make sure it is around 1-dr
 Ar_hist_sec = max(histp)/float(max(hist)); Ar_param_sec = pp[0]/float(p[0])
 
 # Now try the parameters of the concatenated sum
 points_sum = np.array(points.tolist()+pointsp.tolist())
-bins_sum = bins
+bins_sum = bin_list
 hist_sum,bin_edges_sum = np.histogram(points_sum,bins_sum,density=norm)
 bin_centers_sum = (bin_edges_sum[:-1] + bin_edges_sum[1:])/2.0
 parametersSum, var_matrixSum = curve_fit(gauss.gaussFun, bin_centers_sum, hist_sum, p0=p0)
@@ -82,12 +87,13 @@ sum_Gauss_info = 'Sum: $\mu=%.2f$, $\sigma=%.2f$' % (np.abs(param_Sum[1]),np.abs
 # Sum of Primary and Secondary
 # Gaussian representing concatenated data
 # Gaussian representing element-wise summed data.
-plt.figure(1)
-plt.hist(points,bins,normed=norm); plt.hist(pointsp,binsp,normed=norm)
-plt.title('Gaussians')
+plt.figure(1); plt.title('Histograms')
+plt.hist(points_sum,bin_list,zorder=1,facecolor='cyan'); plt.hist(points,bin_list,normed=norm,facecolor='blue'); plt.hist(pointsp,bin_list,normed=norm,facecolor='green')
+p4, = plt.plot(x,catGauss,'r',lw=2); plt.legend([p4],['Cat Fit'])
+plt.title('Histogram with Curve Fit')
 plt.figure(2)
 p1, = plt.plot(x,PrimGauss,lw=2); p2, = plt.plot(x,SecGauss); p3, = plt.plot(x,sumPSGauss)
-p4, = plt.plot(x,catGauss); p5, = plt.plot(x,sum_param_Gauss)
+p4, = plt.plot(x,catGauss,lw=2); p5, = plt.plot(x,sum_param_Gauss)
 plt.legend([p1,p2,p3,p4,p5],[prim_Gauss_info,sec_Gauss_info,'Sum of PS',cat_Gauss_info,sum_Gauss_info],loc=7,prop={'size':10})
 plt.text(mean,max(PrimGauss),str_dr)
 plt.text(meanp,max(SecGauss),str_ds)

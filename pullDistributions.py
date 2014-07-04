@@ -25,10 +25,10 @@ for i in xrange(0,numTrials):
 
     # Draw from gaussian distribution
     mean = 0; var = 1; sigma = np.sqrt(var); 
-    N = 5000
+    N = 20000
     A = 1/np.sqrt((2*np.pi*var))
     points = gauss.draw_1dGauss(mean,var,N)
-    bins = 100
+    bins = 2000
     hist, bin_edges = np.histogram(points,bins,density=True)
     bin_centres = (bin_edges[:-1] + bin_edges[1:])/2
     
@@ -54,9 +54,9 @@ for i in xrange(0,numTrials):
     error_vec_sigma.append(sigma_std)
 
 # Plot the distribution of each estimator        
-plt.figure(1); plt.hist(error_vec_A,bins,normed=True)
-plt.figure(2); plt.hist(error_vec_mean,bins,normed=True)
-plt.figure(3); plt.hist(error_vec_sigma,bins,normed=True)
+plt.figure(1); plt.hist(error_vec_A,bins,normed=True); plt.title('Pull of A')
+plt.figure(2); plt.hist(error_vec_mean,bins,normed=True); plt.title('Pull of Mu')
+plt.figure(3); plt.hist(error_vec_sigma,bins,normed=True); plt.title('Pull of Sigma')
 
 # Store key information regarding distribution 
 mean_A = np.mean(error_vec_A); sigma_A = np.std(error_vec_A)    

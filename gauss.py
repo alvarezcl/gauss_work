@@ -29,7 +29,7 @@ def inverseGaussFun(x, *p):
 
 # Draw from a 1D gaussian
 def draw_1dGauss(mean,var,N):
-    scatter = A*np.random.normal(mean,np.sqrt(var),N)
+    scatter = np.random.normal(mean,np.sqrt(var),N)
     scatter = np.sort(scatter)
     return scatter
 
@@ -148,5 +148,3 @@ def hist_2dPlane(x,y,bins):
     pl.colorbar(img)
     plt.show()
     return X,Y,H,img
-
-# Produce 
