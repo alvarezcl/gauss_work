@@ -20,14 +20,13 @@ import gauss
 
 # Produce a number of points in x-y from 1 bi-variate gaussian
 # distribution. 
-mean = [0,0]
-cov = [[3,2],[2,3]]
+mean = [1,1]
+cov = [[3,1],[1,3]]
 N = 1000
 x,y = np.random.multivariate_normal(mean,cov,N).T
-Z = np.array([x,y])
 
 # Fit method provided by astroML
-mean,sigma1,sigma2,alpha = fit_bivariate_normal(x,y)
+mean_est,sigma1,sigma2,alpha = fit_bivariate_normal(x,y)
 
 # Plot bi-variate gaussian with parameters and determine
 # variances in x-y. The covariance and variances should
@@ -37,10 +36,14 @@ xCord = np.linspace(-domain,domain,N/domain)
 yCord = np.linspace(-domain,domain,N/domain)
 A = 1; 
 X,Y,Z,varx,vary,cov,rho,P1,P2,P = gauss.mult_gaussPrincipal(A,xCord,yCord,mean[0],mean[1],sigma1**2,sigma2**2,alpha)
-plt.hold()
+sigma_x = np.sqrt(varx); sigma_y = np.sqrt(vary)
 V = [cov, 2*cov]
-plt.hold()
+plt.figure(1)
 plt.xlabel('x'); plt.ylabel('y'); plt.title('Distribution of Points with Gaussian Fit (As Contours)')
-plt.plot(x,y,'x'); plt.axis('equal')
-plt.contour(X,Y,Z,zorder=10)
+lab = r'Estimated Parameters: $\sigma_x=%.2f$,$\sigma_y=%.2f$,$\sigma_{xy}=%.2f$,$\alpha=%.2f$' % (sigma_x,sigma_y,cov,alpha)
+p1, = plt.plot(x,y,'x'); plt.axis('equal')
+p2 = plt.contour(X,Y,Z,zorder=10); plt.legend([p1],[lab],prop={'size':12})
+plt.text(0,-4,'Estimated Mean = (%.2f,%.2f)'%(mean_est[0],mean_est[1]))
+plt.figure(2); plt.title('Contours of Estimated Gaussian\n In Principal Axes Frame')
+p3 = plt.contour(P1,P2,P); plt.xlabel('P1'); plt.ylabel('P2')
 plt.show()

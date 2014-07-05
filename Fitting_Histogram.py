@@ -12,7 +12,7 @@ import gauss
 
 norm = False
 N_tot = 10000
-drp = 0.8; str_dr = '$/D_{rp}=%.1f$' % drp; str_ds = '$/D_{rs}=%.1f$' % (1-drp)
+drp = 0.8; str_dr = '$/A_{rp}=%.1f$' % drp; str_ds = '$/A_{rs}=%.1f$' % (1-drp)
 
 # Draw from the major gaussian. Note the number N. It is
 # the main parameter in obtaining your estimators.

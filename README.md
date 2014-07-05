@@ -19,6 +19,9 @@ Draw from 2 1D Gaussians and attempt to find the parameters of the sum of their 
 Fitting_Summing_Gaussians:
 Draws from 2 1D Gaussians and attempts to find the parameters of the sum of the distributions. Key difference is the loop through the different amplitude ratios. 
 
+format:
+Formatting library for strings and information in plots.
+
 GalSimInstallation:
 Instructions for installing GalSim
 
