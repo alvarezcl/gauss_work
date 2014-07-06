@@ -5,6 +5,10 @@ Created on Tue Jul  1 11:46:43 2014
 @author: luis
 """
 
+## This file draws from a 2D Gaussian and obtains parameters 
+## from the scatter and convert into variances in x and y 
+## (including cov).
+
 import numpy as np
 from scipy.optimize import curve_fit
 import matplotlib.pyplot as plt

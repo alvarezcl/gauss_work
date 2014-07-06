@@ -16,6 +16,7 @@ import gauss
 loop = 11
 info = []; num_Pts = []
 N_tot = 1000
+norm = True
 
 # Loop over number of points drawn from each distribution
 for i in xrange(0,loop):
@@ -27,7 +28,7 @@ for i in xrange(0,loop):
     points = gauss.draw_1dGauss(mean,var,N)
         
     # Now draw from a minor gaussian. Note Np
-    meanp = 2; sigmap = 2; varp = sigmap**2; Np = N_tot
+    meanp = 5; sigmap = 1; varp = sigmap**2; Np = N_tot
     Ap = 1/np.sqrt((2*np.pi*varp))
     pointsp = gauss.draw_1dGauss(meanp,varp,Np)
         
@@ -38,7 +39,7 @@ for i in xrange(0,loop):
 
     # Now implement the sum of the draws by concatenating the two arrays.
     points_tot = np.array(points.tolist()+pointsp.tolist())
-    hist_tot, bin_edges_tot = np.histogram(points_tot,bin_list,density=False)
+    hist_tot, bin_edges_tot = np.histogram(points_tot,bin_list,density=norm)
     bin_centres_tot = (bin_edges_tot[:-1] + bin_edges_tot[1:])/2.0
     # Plot the histogram of the sum
     #plt.figure(2); plt.title('Combined Histogram')

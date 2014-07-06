@@ -12,9 +12,9 @@ import numpy as np
 from scipy.optimize import curve_fit
 import matplotlib.pyplot as plt
 import gauss
-import sys
+import format
 
-numTrials = 15000
+numTrials = 10000
 # Pull given by (a_j - a_true)/a_error)
 error_vec_A = [] 
 error_vec_mean = []
@@ -23,12 +23,18 @@ error_vec_sigma = []
 # Loop to determine pull distribution
 for i in xrange(0,numTrials):
 
-    # Draw from gaussian distribution
+    # Draw from primary distribution
     mean = 0; var = 1; sigma = np.sqrt(var); 
     N = 20000
     A = 1/np.sqrt((2*np.pi*var))
     points = gauss.draw_1dGauss(mean,var,N)
-    bins = 2000
+    
+    # Histogram parameters
+    bin_size = 0.1; min_edge = mean-6*sigma; max_edge = mean+9*sigma
+    Nn = (max_edge-min_edge)/bin_size; Nplus1 = Nn + 1
+    bins = np.linspace(min_edge, max_edge, Nplus1)
+    
+    # Obtain histogram from primary distributions    
     hist, bin_edges = np.histogram(points,bins,density=True)
     bin_centres = (bin_edges[:-1] + bin_edges[1:])/2
     

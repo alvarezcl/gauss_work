@@ -5,6 +5,10 @@ Created on Thu Jul  3 11:23:27 2014
 @author: luis
 """
 
+## This file produces histogram of samples drawn from gaussian and 
+## plots gaussian curve fit corresponding to the samples.
+
+
 import numpy as np
 from scipy.optimize import curve_fit
 import matplotlib.pyplot as plt

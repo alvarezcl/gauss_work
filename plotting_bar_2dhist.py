@@ -10,7 +10,7 @@ Created on Thu Jun 26 11:21:56 2014
 import numpy as np
 import matplotlib.pyplot as plt
 import gauss
-import pylab as pl
+import format
 
 ## Data set 1
 
@@ -24,10 +24,10 @@ plt.plot(x,y,'x')
 
 # Produce a histogram of data set 1.
 bins = 30
-X,Y,H,hist = gauss.hist_2dPlane(x,y,bins)
+X,Y,H,hist = format.hist_2dPlane(x,y,bins)
 
 # Produce a bar graph of data set 1
-bar1 = gauss.hist_3dBar(x,y,bins)
+bar1 = format.hist_3dBar(x,y,bins)
 
 ## Data set 2
 
@@ -39,14 +39,14 @@ plt.figure(4)
 plt.plot(xp,yp,'rx') 
 
 # Produce a histogram of data set 2.
-Xp,Yp,Hp,histp = gauss.hist_2dPlane(xp,yp,bins)
+Xp,Yp,Hp,histp = format.hist_2dPlane(xp,yp,bins)
 
 # Produce a bar graph of data set 2
-bar2 = gauss.hist_3dBar(xp,yp,bins)
+bar2 = format.hist_3dBar(xp,yp,bins)
 
 
 ## Combined Data set
 x_sum = np.array(x.tolist()+xp.tolist())
 y_sum = np.array(y.tolist()+yp.tolist())
 X_tot,Y_tot,H_tot,hist_tot = gauss.hist_2dPlane(x_sum,y_sum,bins)
-bar_tot = gauss.hist_3dBar(x_sum,y_sum,bins)
+bar_tot = format.hist_3dBar(x_sum,y_sum,bins)

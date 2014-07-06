@@ -20,13 +20,14 @@ Fitting_Summing_Gaussians:
 Draws from 2 1D Gaussians and attempts to find the parameters of the sum of the distributions. Key difference is the loop through the different amplitude ratios. 
 
 format:
-Formatting library for strings and information in plots.
+Formatting library for strings and information in plots as well
+as producing plots given inputs.
 
 GalSimInstallation:
 Instructions for installing GalSim
 
 gauss:
-Function library for various uses ranging from plotting gaussians in 1D and 2D and plot functions for contours,histograms, and 3D bar graphs.
+Function library for various uses ranging from drawing from 1D and 2D gaussians and for their analytic definitions.
 
 multigauss:
 A script to plot 2 2D gaussians with different parameters and plotting them in 3D as well as the contour plot.

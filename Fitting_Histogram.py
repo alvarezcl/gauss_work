@@ -10,6 +10,12 @@ from scipy.optimize import curve_fit
 import matplotlib.pyplot as plt
 import gauss
 
+## Draw from 2 1D Gaussians and attempt to find 
+## the parameters of the sum of their histograms 
+## with plotting of the histogram distributions 
+## as well as the gaussians. Streamlined for 
+## amplitude ratios and figures are much more presentable.
+
 norm = False
 N_tot = 10000
 drp = 0.8; str_dr = '$/A_{rp}=%.1f$' % drp; str_ds = '$/A_{rs}=%.1f$' % (1-drp)

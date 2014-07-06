@@ -11,8 +11,6 @@ Created on Wed Jun 25 15:30:10 2014
 # parameters from the data, and a gaussian surface/contour is
 # is drawn upon the data.
 
-import astropy as apy
-import astroML as aml
 from astroML.stats import fit_bivariate_normal
 import numpy as np
 import matplotlib.pyplot as plt
