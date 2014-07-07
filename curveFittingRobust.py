@@ -21,7 +21,7 @@ A = 1/np.sqrt((2*np.pi*var))
 points = gauss.draw_1dGauss(mean,var,N)
 
 # Histogram Setup
-bin_size = 0.1; min_edge = mean-6*sigma; max_edge = mean+9*sigma
+bin_size = 0.1; min_edge = mean-14*sigma; max_edge = mean+14*sigma
 Nn = (max_edge-min_edge)/bin_size; Nplus1 = Nn + 1
 bins = np.linspace(min_edge, max_edge, Nplus1)
 
@@ -30,7 +30,7 @@ hist, bin_edges = np.histogram(points,bins)
 bin_centres = (bin_edges[:-1] + bin_edges[1:])/2
     
 # Now draw from a secondary gaussian
-meanp = 2; varp = 1; sigmap = np.sqrt(varp); Np = N
+meanp = 8; varp = 5; sigmap = np.sqrt(varp); Np = N
 pointsp = gauss.draw_1dGauss(meanp,varp,Np)    
 histp, bin_edgesp = np.histogram(pointsp,bins)
 bin_centresp = (bin_edgesp[:-1] + bin_edgesp[1:])/2
