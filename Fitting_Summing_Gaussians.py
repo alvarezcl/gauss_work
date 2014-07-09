@@ -6,7 +6,7 @@ Created on Wed Jul  2 14:45:42 2014
 """
 
 ## This file draws from two gaussian distributions and attempts
-## to find the best fit parameters. Useful for deblending.
+## to find the best fit parameters using draw ratios.
 
 import numpy as np
 from scipy.optimize import curve_fit
@@ -28,7 +28,7 @@ for i in xrange(0,loop):
     points = gauss.draw_1dGauss(mean,var,N)
         
     # Now draw from a minor gaussian. Note Np
-    meanp = 5; sigmap = 1; varp = sigmap**2; Np = N_tot
+    meanp = 3; sigmap = 1; varp = sigmap**2; Np = N_tot
     Ap = 1/np.sqrt((2*np.pi*varp))
     pointsp = gauss.draw_1dGauss(meanp,varp,Np)
         

@@ -16,8 +16,17 @@ from matplotlib import cm
 
 # Return a string (with Latex formatting) of particular information
 # in the following format: Type,Amplitude,mean,sigma
-def info_gaussian(type,A,mu,sigma):
+def info_gaussian(type,A,mu,sigma):    
     return type + ': $A=%.2f$, $\mu=%.2f$, $\sigma=%.2f$' % (A,mu,sigma)
+
+# Return similar string with primary gaussian
+def info_gaussian_Acp(type,Ar,mu,sigma):
+    return type + ': $A_{cp}=%.2f$, $\mu=%.2f$, $\sigma=%.2f$' % (Ar,mu,sigma)
+
+# Return similar string with secondary gaussian
+def info_gaussian_Acs(type,Ar,mu,sigma):
+    return type + ': $A_{cs}=%.2f$, $\mu=%.2f$, $\sigma=%.2f$' % (Ar,mu,sigma)
+
 
 # Plot 3d surface given any set of values, X, Y, Z    
 def plot_3d(X,Y,Z):

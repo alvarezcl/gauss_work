@@ -14,8 +14,6 @@ from scipy.optimize import curve_fit
 import matplotlib.pyplot as plt
 import mssg_gauss
 import plotutils
-import sys
-import ipdb
 
 #### Beginning from an analytic expression, plot histogram
 

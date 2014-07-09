@@ -22,6 +22,12 @@ def gaussFun(x, *p):
     A, mu, sigma = p
     return A*np.exp(-(x-mu)**2/(2.*sigma**2))
 
+# Sum of two gaussians in 1D.
+def sum_gauss_2_1D(x,*m):
+    A1,mu1,sigma1,A2,mu2,sigma2 = m
+    return A1*np.exp(-(x-mu1)**2/(2.*sigma1**2)) + A2*np.exp(-(x-mu2)**2/(2.*sigma2**2))
+
+# Inverse gaussian, for reference.
 def inverseGaussFun(x, *p):
     A, mu, sigma = p
     return np.sqrt(2*sigma**2*np.log(A/x)) + mu

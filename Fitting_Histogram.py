@@ -18,11 +18,13 @@ import gauss
 
 norm = False
 N_tot = 10000
-drp = 0.8; str_dr = '$/A_{rp}=%.1f$' % drp; str_ds = '$/A_{rs}=%.1f$' % (1-drp)
+drp = 1
+drs = 0.5 
+str_dr = '$/A_{rp}=%.1f$' % drp; str_ds = '$/A_{rs}=%.1f$' % (drs)
 
 # Draw from the major gaussian. Note the number N. It is
 # the main parameter in obtaining your estimators.
-mean = 0; sigma = 1; var = sigma**2; N = N_tot*drp
+mean = 0; sigma = 1; var = sigma**2; N = N_tot*drp*sigma
 points = gauss.draw_1dGauss(mean,var,N)
 
 # Histogram parameters
@@ -35,7 +37,7 @@ bin_centers = (bin_edges[:-1] + bin_edges[1:])/2.0
 width = bin_edges[1]-bin_edges[0]
 
 # Now draw from a minor gaussian. Note Np
-meanp = 3; sigmap = 1; varp = sigmap**2; Np = N_tot-N
+meanp = 2; sigmap = 3; varp = sigmap**2; Np = (N_tot*drs)*sigmap
 pointsp = gauss.draw_1dGauss(meanp,varp,Np)
 binsp = bin_list
 histp,bin_edgesp = np.histogram(pointsp,bin_list,density=norm)
@@ -43,9 +45,7 @@ bin_centersp = (bin_edgesp[:-1] + bin_edgesp[1:])/2.0
 widthp = bin_edgesp[1]-bin_edgesp[0]
 
 # Initial guess
-g = np.random.uniform(-5,5,1)
-p0 = [g,g,g]
-
+p0 = ((max(hist)+max(histp))/2.0,(mean+meanp)/2.0,(sigma+sigmap)/2.0)
 # Result of the fits for each gaussian
 parametersPrim, var_matrixPrim = curve_fit(gauss.gaussFun, bin_centers, hist, p0=p0)
 parametersSec, var_matrixSec = curve_fit(gauss.gaussFun, bin_centersp, histp, p0=p0)
