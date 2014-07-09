@@ -3,6 +3,9 @@ gauss_work
 
 Work centered around Gaussian Distributions
 
+2_1D_Gaussian_Fit:
+Produce histogram of samples drawn from two gaussians and attempt to find fit of sum of gaussians.
+
 1D_Gaussian_Fit: 
 Produce histogram of samples drawn from gaussian and plot gaussian corresponding to the samples.
 
@@ -19,15 +22,26 @@ Draw from 2 1D Gaussians and attempt to find the parameters of the sum of their 
 Fitting_Summing_Gaussians:
 Draws from 2 1D Gaussians and attempts to find the parameters of the sum of the distributions. Key difference is the loop through the different amplitude ratios. 
 
-format:
-Formatting library for strings and information in plots as well
-as producing plots given inputs.
+plotutils:
+Formatting library for strings and information in plots as well as producing plots given inputs.
 
 GalSimInstallation:
 Instructions for installing GalSim
 
 gauss:
 Function library for various uses ranging from drawing from 1D and 2D gaussians and for their analytic definitions.
+
+Moving_Thru_Amp:
+Script to change the amplitude coefficient on a secondary gaussian. Produces an estimate of the best fit parameters over
+the change in amplitude.
+
+Moving_Thru_Mean:
+Script to change the mean on a secondary gaussian. Produces an estimate of the best fit parameters over
+the change in mean.
+
+Moving_Thru_Sigma:
+Script to change sigma on a secondary gaussian. Produces an estimate of the best fit parameters over
+the change in sigma.
 
 multigauss:
 A script to plot 2 2D gaussians with different parameters and plotting them in 3D as well as the contour plot.
